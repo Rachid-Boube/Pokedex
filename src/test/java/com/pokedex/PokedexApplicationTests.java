@@ -10,4 +10,5 @@ class PokedexApplicationTests {
 	void contextLoads() {
 	}
 
+
 }
