@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: pokedex
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: pokedex
+      password: pokedex123
+      database: mydatabase
