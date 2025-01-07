@@ -2,7 +2,11 @@ package com.pokedex.controller;
 
 import com.pokedex.entite.Pokemon;
 import com.pokedex.service.PokemonService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,21 +18,22 @@ import java.util.Optional;
 public class PokemonController {
 
     @Autowired
-    private PokemonService service;
+    private  PokemonService pokemonService;
 
-    @GetMapping
-    public List<Pokemon> getAllPokemons() {
-        return service.getAllPokemons();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Pokemon> getPokemonById(@PathVariable int id) {
-        Optional<Pokemon> pokemon = service.getPokemonById(id);
-        return pokemon.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/all")
+    public ResponseEntity<List<Pokemon>> getAllPokemons() {
+        return new ResponseEntity<>(this.pokemonService.getAll(), HttpStatus.OK);
     }
 
     @PostMapping
     public Pokemon addPokemon(@RequestBody Pokemon pokemon) {
-        return service.addPokemon(pokemon);
+        return this.pokemonService.create(pokemon);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Pokemon>> getPokemonById(@PathVariable String id) {
+        return new ResponseEntity<>(this.pokemonService.getById(id), HttpStatus.OK);
+    }
+
+
 }
