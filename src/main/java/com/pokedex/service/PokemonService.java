@@ -32,4 +32,11 @@ public class PokemonService {
     public void deleteById(String id) {
         this.pokemonRepository.deleteById(id);
     }
+
+    public Optional<Pokemon> getByName(String name) {
+        List<Pokemon> pokemons = this.pokemonRepository.findAll();
+        return pokemons.stream()
+                .filter(pokemon -> pokemon.getName().containsValue(name))  // Rechercher par nom dans la map
+                .findFirst();
+    }
 }
