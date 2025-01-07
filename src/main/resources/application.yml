@@ -2,12 +2,8 @@ spring:
   application:
     name: pokedex
 
+
   data:
     mongodb:
-     uri: mongodb+srv://pokedex694:pokedex123@pokedex.6anix.mongodb.net/?retryWrites=true&w=majority&appName=POKEDEX
-     database: pokedex
-     connection-pool:
-         max-size: 50
-         min-size: 10
-         max-wait-time: 3000ms # Délai d'attente maximum pour obtenir une connexion (en millisecondes)
-         max-connection-lifetime: 60s # Durée de vie maximale d'une connexion dans le pool
+      uri: mongodb+srv://pokedex694:pokedex123@pokedex.6anix.mongodb.net/pokedex?retryWrites=true&w=majority&appName=POKEDEX
+
