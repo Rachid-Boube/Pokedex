@@ -1,12 +1,10 @@
 package com.pokedex.entite;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,10 +19,11 @@ import java.util.Map;
 public class Pokemon {
 
     @Id
-    @JsonIgnore
+    @JsonProperty("_id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
 
-    @JsonProperty("id")
+    @JsonProperty("pokemonId")
     private int pokemonId;
 
     @JsonProperty("name")
@@ -38,6 +37,14 @@ public class Pokemon {
 
     @JsonProperty("description")
     private String description;
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
     public int getPokemonId() {
         return pokemonId;
@@ -77,13 +84,5 @@ public class Pokemon {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
     }
 }
