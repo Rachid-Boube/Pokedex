@@ -18,7 +18,7 @@ import java.util.Optional;
 public class PokemonController {
 
     @Autowired
-    private  PokemonService pokemonService;
+    private PokemonService pokemonService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Pokemon>> getAllPokemons() {
@@ -31,8 +31,10 @@ public class PokemonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Pokemon>> getPokemonById(@PathVariable String id) {
-        return new ResponseEntity<>(this.pokemonService.getById(id), HttpStatus.OK);
+    public ResponseEntity<Pokemon> getPokemonById(@PathVariable String id) {
+        return this.pokemonService.getById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 
