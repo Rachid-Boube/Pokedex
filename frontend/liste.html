@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Liste de Pokémon</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Liste des Pokémon</h1>
+    <main>
+        <label for="sort-options">Trier par :</label>
+        <select id="sort-options" onchange="changementCritere()">
+            <option value="id">ID</option>
+            <option value="nom">Nom</option>
+            <option value="type">Type</option>
+        </select>
+        
+        <ul id="listePokemons" class="liste"></ul>
+
+        <a href="index.html">Retour à l'accueil</a>
+    </main>
+</body>
+</html>
