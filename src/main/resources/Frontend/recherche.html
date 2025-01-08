@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Recherche Pokémon</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Recherche de Pokémon</h1>
+    <main>
+        <label for="critere">Critère :</label>
+        <select id="critere">
+            <option value="id">ID</option>
+            <option value="nom">Nom</option>
+            <option value="type">Type</option>
+        </select>
+        <input type="text" id="valeur" placeholder="Entrez une valeur">
+        <button onclick="rechercher()">Rechercher</button>
+        <div id="resultat"></div>
+        <a href="index.html">Retour à l'accueil</a>
+    </main>
+</body>
+</html>
