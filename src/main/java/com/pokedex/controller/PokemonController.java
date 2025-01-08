@@ -18,9 +18,9 @@ import java.util.Optional;
 public class PokemonController {
 
     @Autowired
-    private  PokemonService pokemonService;
+    private PokemonService pokemonService;
 
-    @GetMapping("/all")
+    @GetMapping // 修改路径
     public ResponseEntity<List<Pokemon>> getAllPokemons() {
         return new ResponseEntity<>(this.pokemonService.getAll(), HttpStatus.OK);
     }
@@ -34,6 +34,4 @@ public class PokemonController {
     public ResponseEntity<Optional<Pokemon>> getPokemonById(@PathVariable String id) {
         return new ResponseEntity<>(this.pokemonService.getById(id), HttpStatus.OK);
     }
-
-
 }
