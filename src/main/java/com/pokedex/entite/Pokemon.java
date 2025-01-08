@@ -20,9 +20,10 @@ import java.util.Map;
 public class Pokemon {
 
     @Id
+    @JsonProperty("_id")
     private ObjectId id;
 
-    @JsonProperty("id")
+    @JsonProperty("pokemonId")
     private int pokemonId;
 
     @JsonProperty("name")
@@ -33,4 +34,7 @@ public class Pokemon {
 
     @JsonProperty("base")
     private Map<String, Integer> base;
+
+    @JsonProperty("description")
+    private String description;
 }
