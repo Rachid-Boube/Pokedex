@@ -16,7 +16,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('img/background.png'); /* 确保路径正确 */
+    background-image: url('./img/background.png'); /* 确保路径正确 */
     background-size: cover; /* 让背景图覆盖整个页面 */
     background-position: center; /* 居中背景图 */
     background-attachment: fixed; /* 固定背景图，不随页面滚动 */
