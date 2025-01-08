@@ -1,1 +1,82 @@
-<p>123</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon API Test</title>
+</head>
+<body>
+<h1>Test Pokemon API</h1>
+
+<button id="getAllPokemons">Get All Pokemons</button>
+<button id="getPokemonById">Get Pokemon By ID</button>
+<input type="number" id="pokemonIdInput" placeholder="Enter Pokemon ID">
+<button id="addPokemon">Add Pokemon</button>
+<input type="text" id="pokemonNameInput" placeholder="Enter Pokemon Name">
+
+<h3>Response:</h3>
+<pre id="response"></pre>
+
+<script>
+    const API_BASE_URL = "https://probable-waddle-5gxxp7w5w5rrfp7vv-8080.app.github.dev/api/pokemons"; // 替换为您的后端地址
+
+    document.getElementById("getAllPokemons").addEventListener("click", async () => {
+        try {
+            const response = await fetch(API_BASE_URL); // 确保路径一致
+            if (!response.ok) {
+                throw new Error("Failed to fetch pokemons");
+            }
+            const data = await response.json();
+            document.getElementById("response").textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+            console.error("Error fetching all pokemons:", error);
+            document.getElementById("response").textContent = "Error: " + error.message;
+        }
+    });
+
+    document.getElementById("getPokemonById").addEventListener("click", async () => {
+        const pokemonId = document.getElementById("pokemonIdInput").value;
+        if (!pokemonId) {
+            alert("Please enter a Pokemon ID.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/${pokemonId}`);
+            if (!response.ok) {
+                throw new Error("Pokemon not found");
+            }
+            const data = await response.json();
+            document.getElementById("response").textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+            console.error("Error fetching pokemon by ID:", error);
+            document.getElementById("response").textContent = "Error: " + error.message;
+        }
+    });
+
+    document.getElementById("addPokemon").addEventListener("click", async () => {
+        const pokemonName = document.getElementById("pokemonNameInput").value;
+        if (!pokemonName) {
+            alert("Please enter a Pokemon name.");
+            return;
+        }
+
+        try {
+            const response = await fetch(API_BASE_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name: pokemonName }),
+            });
+
+            const data = await response.json();
+            document.getElementById("response").textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+            console.error("Error adding pokemon:", error);
+            document.getElementById("response").textContent = "Error: " + error.message;
+        }
+    });
+</script>
+</body>
+</html>
