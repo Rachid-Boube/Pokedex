@@ -22,9 +22,6 @@ public class PokemonService {
     }
 
 
-    public Optional<Pokemon> getById(ObjectId id) {
-        return this.pokemonRepository.findById(id);
-    }
 
     public Optional<Pokemon> getByPokemonId(int pokemonId) {
         return this.pokemonRepository.findByPokemonId(pokemonId);
