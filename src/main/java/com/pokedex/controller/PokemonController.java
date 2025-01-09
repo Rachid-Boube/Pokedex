@@ -17,8 +17,12 @@ import java.util.Optional;
 @RequestMapping("/api/pokemons")
 public class PokemonController {
 
+    private final PokemonService pokemonService;
+
     @Autowired
-    private PokemonService pokemonService;
+    public PokemonController(PokemonService pokemonService) {
+        this.pokemonService = pokemonService;
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<Pokemon>> getAllPokemons() {
@@ -30,9 +34,9 @@ public class PokemonController {
         return this.pokemonService.create(pokemon);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Pokemon> getPokemonById(@PathVariable String id) {
-        return this.pokemonService.getById(id)
+    @GetMapping("/{pokemonId}")
+    public ResponseEntity<Pokemon> getPokemonById(@PathVariable int pokemonId) {
+        return this.pokemonService.getByPokemonId(pokemonId)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

@@ -5,21 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Liste de Pokémon</title>
-    <script src="script.js" defer></script>
+
+    <style>
+        .pokemon-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .pokemon-card {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .pokemon-card img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
+    <a href="index.html">Retour à l'accueil</a>
     <h1>Liste des Pokémon</h1>
-    <main>
-        <label for="sort-options">Trier par :</label>
-        <select id="sort-options" onchange="changementCritere()">
-            <option value="id">ID</option>
-            <option value="nom">Nom</option>
-            <option value="type">Type</option>
-        </select>
-        
-        <ul id="listePokemons" class="liste"></ul>
+    <div id="pokemon-container" class="pokemon-list">
+    </div>
 
-        <a href="index.html">Retour à l'accueil</a>
-    </main>
+    <script>
+        fetch('/api/pokemons/all')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('pokemon-container');
+                data.forEach(pokemon => {
+                    const card = document.createElement('div');
+                    card.className = 'pokemon-card';
+                    const PokemonId=pokemon.pokemonId;
+                    const name = Object.entries(pokemon.name).map(([key, value]) => `${key}:${value}`).join('<br>');
+                    const types = pokemon.type.join(', ');
+                    const baseStats = Object.entries(pokemon.base).map(([key, value]) => `${key}:${value}`).join('<br>');
+                    card.innerHTML = `
+                        <h2>${name}</h2>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonId}.png" alt="${name}">
+                        <p>PokemonId : ${PokemonId}</p>
+                        <p>Type : ${types}</p>
+                        <p>Base : <br>${baseStats}</p>
+                        <p>Description : ${pokemon.description}</p>
+                    `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
 </body>
 </html>

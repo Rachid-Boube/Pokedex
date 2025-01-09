@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-
+@RequiredArgsConstructor
 public class PokemonService {
 
-    @Autowired
-    private  PokemonRepository pokemonRepository;
+    private final PokemonRepository pokemonRepository;
 
     public List<Pokemon> getAll() {
         return this.pokemonRepository.findAll();
@@ -23,6 +22,10 @@ public class PokemonService {
 
     public Optional<Pokemon> getById(String id) {
         return this.pokemonRepository.findById(id);
+    }
+
+    public Optional<Pokemon> getByPokemonId(int pokemonId) {
+        return this.pokemonRepository.findByPokemonId(pokemonId);
     }
 
     public Pokemon create(Pokemon pokemon) {
