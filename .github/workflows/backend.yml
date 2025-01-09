@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 17
+          distribution: 'temurin' # 指定 Java 的发行版
 
       # 3. 构建 Spring Boot 应用
       - name: Build backend
