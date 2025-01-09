@@ -3,11 +3,13 @@ package com.pokedex.service;
 import com.pokedex.entite.Pokemon;
 import com.pokedex.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class PokemonService {
     }
 
 
-    public Optional<Pokemon> getById(String id) {
+    public Optional<Pokemon> getById(ObjectId id) {
         return this.pokemonRepository.findById(id);
     }
 
@@ -32,7 +34,18 @@ public class PokemonService {
         return this.pokemonRepository.save(pokemon);
     }
 
-    public void deleteById(String id) {
-        this.pokemonRepository.deleteById(id);
+
+
+    public Optional<Pokemon> getByName(String name) {
+        List<Pokemon> pokemons = this.pokemonRepository.findAll();
+        return pokemons.stream()
+                .filter(pokemon -> pokemon.getName().containsValue(name))  // Rechercher par nom dans la map
+                .findFirst();
+    }
+    public List<Pokemon> getByType(String type) {
+        List<Pokemon> pokemons = this.pokemonRepository.findAll();
+        return pokemons.stream()
+                .filter(pokemon -> pokemon.getType().contains(type))
+                .collect(Collectors.toList());
     }
 }

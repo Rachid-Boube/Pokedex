@@ -1,0 +1,142 @@
+body {
+    font-family: 'Arial', sans-serif;
+    position: relative; /* 确保伪元素的定位有效 */
+}
+
+main {
+    margin-top: 50px;
+    padding-left: 100px;
+}
+
+/* 伪元素*/
+body::before { 
+    content: ''; /* 渲染，必须设置 */
+    position: fixed; /* 设置位置固定 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./img/background.png'); /* 确保路径正确 */
+    background-size: cover; /* 让背景图覆盖整个页面 */
+    background-position: center; /* 居中背景图 */
+    background-attachment: fixed; /* 固定背景图，不随页面滚动 */
+    opacity: 0.1; /* 调整透明度 */
+    z-index: -1; /* 确保背景图不遮挡内容 */
+}
+
+
+h1 {
+    font-family: 'Arial Black', sans-serif;
+    letter-spacing: 2px; /* 增加字符间距 */
+    font-weight: bold;
+    color: #002951;
+    text-transform: uppercase; /* 全部大写 */
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
+    text-align: center;
+    margin: 20px 0;
+    font-size: 3em;
+}
+
+body.index a {
+    display: inline-block; /* 设置为行内块级元素 */
+    text-align: center;
+    text-decoration: none; /* 去掉默认的下划线 */
+    color: #000000; /* 文字颜色 */
+    margin-left: 100px;
+    padding: 12px 24px;
+    width: 300px; /* 固定按钮宽度 */
+    border: 2px solid #b2ebf2; /* 边框颜色稍深 */
+    border-radius: 8px; /* 圆角效果 */
+    font-size: 1.2em;
+    background-color: rgba(0, 121, 107, 0.1);
+    transition: all 0.3s ease; /* 平滑过渡效果 */
+}
+
+body.index a:hover {
+    background-color: rgba(0, 255, 225, 0.1); /*悬停时加深背景颜色*/
+    color: #005f6b; /* 文字颜色变化 */
+    transform: scale(1.05); /* 鼠标悬停时放大 */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* 增加悬停阴影效果 */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+ul.liste {
+    list-style-type: none;
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+
+li {
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+button {
+    margin: 10px 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #001b4d;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+label {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 10px; /* 增加文字和选择框之间的间距 */
+    vertical-align: middle; /* 垂直对齐 */
+}
+
+select {
+    display: inline-block; /* 让选择框与文字在同一行显示 */
+    padding: 5px 10px; 
+    font-size: 1em;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    width: 100px;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+input[type="text"] {
+    width: 200px; /* 设置宽度 */
+    padding: 5px; /* 内边距 */
+    border-radius: 5px; /* 圆角 */
+    border: 2px solid #ccc; /* 边框样式 */
+    font-size: 1em; /* 字体大小 */
+    font-family: Arial, sans-serif; /* 字体 */
+    margin-right: 10px; /* 输入框与按钮之间的间距 */
+}
+
+#resultat {
+    font-family: Arial, sans-serif; 
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    font-size: 1em; 
+    color: #333; 
+    line-height: 2.5; /* 行间距 */
+}
+
+#resultat p {
+    font-size: 1.2em;
+    color: #ff0000; /* 红色消息 */
+    font-weight: bold;
+}
+

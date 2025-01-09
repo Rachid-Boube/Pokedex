@@ -2,10 +2,8 @@ package com.pokedex.controller;
 
 import com.pokedex.entite.Pokemon;
 import com.pokedex.service.PokemonService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +24,10 @@ public class PokemonController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Pokemon>> getAllPokemons() {
-        return new ResponseEntity<>(this.pokemonService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<List<Pokemon>>(this.pokemonService.getAll(), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json")
     public Pokemon addPokemon(@RequestBody Pokemon pokemon) {
         return this.pokemonService.create(pokemon);
     }
