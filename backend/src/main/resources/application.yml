@@ -10,3 +10,5 @@ spring:
     mongodb:
       uri: mongodb+srv://pokedex694:pokedex123@pokedex.6anix.mongodb.net/pokedex?retryWrites=true&w=majority&appName=POKEDEX
 
+  profiles:
+      active: dev
