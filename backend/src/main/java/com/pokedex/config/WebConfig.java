@@ -13,5 +13,6 @@ public class MyCorsConfig extends WebMvcConfigurerSupport {
                 .allowedHeaders("*") // 允许的请求头
                 .allowCredentials(false) // 是否允许发送Cookie
                 .maxAge(3600); // 预检请求的缓存时间，单位秒
+                
     }
 }
