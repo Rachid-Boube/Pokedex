@@ -12,12 +12,19 @@
     <main>
         <label for="sort-options">Trier par :</label>
         <select id="sort-options" onchange="changementCritere()">
-            <option value="id">ID</option>
-            <option value="nom">Nom</option>
+            <option value="pokemonId">ID</option>
+            <option value="name.english">Nom (Anglais)</option>
             <option value="type">Type</option>
         </select>
         
+        <!-- 显示 Pokémon 列表的地方 -->
         <ul id="listePokemons" class="liste"></ul>
+
+        <!-- 分页 -->
+        <div id="pagination"></div>
+
+        <!-- 加载提示 -->
+        <div id="loading" style="display:none;">Loading...</div>
 
         <a href="index.html">Retour à l'accueil</a>
     </main>

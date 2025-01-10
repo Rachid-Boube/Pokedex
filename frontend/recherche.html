@@ -12,13 +12,18 @@
     <main>
         <label for="critere">Critère :</label>
         <select id="critere">
-            <option value="id">ID</option>
-            <option value="nom">Nom</option>
+            <option value="pokemonId">ID</option>
+            <option value="english">Nom (Anglais)</option>
+            <option value="japanese">Nom (Japonais)</option>
+            <option value="chinese">Nom (Chinois)</option>
+            <option value="french">Nom (Français)</option>
             <option value="type">Type</option>
         </select>
         <input type="text" id="valeur" placeholder="Entrez une valeur">
         <button onclick="rechercher()">Rechercher</button>
+
         <div id="resultat"></div>
+
         <a href="index.html">Retour à l'accueil</a>
     </main>
 </body>
