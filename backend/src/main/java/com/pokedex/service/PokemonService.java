@@ -4,7 +4,6 @@ import com.pokedex.entite.Pokemon;
 import com.pokedex.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +20,6 @@ public class PokemonService {
         return this.pokemonRepository.findAll();
     }
 
-
-
     public Optional<Pokemon> getByPokemonId(int pokemonId) {
         return this.pokemonRepository.findByPokemonId(pokemonId);
     }
@@ -32,13 +29,13 @@ public class PokemonService {
     }
 
 
-
     public Optional<Pokemon> getByName(String name) {
         List<Pokemon> pokemons = this.pokemonRepository.findAll();
         return pokemons.stream()
                 .filter(pokemon -> pokemon.getName().containsValue(name))  // Rechercher par nom dans la map
                 .findFirst();
     }
+
     public List<Pokemon> getByType(String type) {
         List<Pokemon> pokemons = this.pokemonRepository.findAll();
         return pokemons.stream()

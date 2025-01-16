@@ -25,6 +25,7 @@ public class Pokemon {
 
     @Id
     @JsonProperty("_id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
 
     @JsonProperty("pokemonId")

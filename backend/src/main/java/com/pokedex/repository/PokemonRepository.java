@@ -1,12 +1,11 @@
 package com.pokedex.repository;
 
 import com.pokedex.entite.Pokemon;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PokemonRepository extends MongoRepository<Pokemon, String> {
+public interface PokemonRepository extends MongoRepository<Pokemon, Integer> {
     Optional<Pokemon> findByPokemonId(int pokemonId);
 }
