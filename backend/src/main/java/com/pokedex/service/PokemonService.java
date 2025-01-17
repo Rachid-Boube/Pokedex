@@ -3,7 +3,6 @@ package com.pokedex.service;
 import com.pokedex.entite.Pokemon;
 import com.pokedex.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pokedex.config.AppConfig;
+import com.pokedex.security.AppConfig;
 
 @RestController
 public class EnvironmentController {
