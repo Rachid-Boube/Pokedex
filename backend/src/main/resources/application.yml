@@ -13,3 +13,8 @@ spring:
   mail:
     host: localhost
     port: 9025
+
+# Configuration du port du serveur de l'application et du du chemin de mes url pour qu'il commmence par api
+server:
+  servlet:
+    context-path: /api

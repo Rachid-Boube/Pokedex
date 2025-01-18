@@ -5,6 +5,7 @@ import com.pokedex.entite.Validation;
 import com.pokedex.repository.ValidationRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,4 +53,33 @@ public class ValidationService {
         // Envoie une notification à l'utilisateur
         this.notificationService.envoyerNotification(validation);
     }
+
+    public Validation lireEnFonctionDuCode(String code) {
+        // Cherche une validation par code et retourne l'instance si elle existe, sinon lance une exception
+        return this.validationRepository.findByCode(code)
+                .orElseThrow(() -> new RuntimeException("Code de validation invalide ou expiré"));
+    }
+
+    public void activerValidation(String code) {
+        // Recherche la validation par code
+        Validation validation = this.validationRepository.findByCode(code)
+                .orElseThrow(() -> new RuntimeException("Code de validation invalide ou déjà activé"));
+
+        // Vérifie que le champ `activation` est null avant de le mettre à jour
+        if (validation.getActivation() == null) {
+            validation.setActivation(Instant.now()); // Définit l'activation à l'instant présent
+            validationRepository.save(validation); // Sauvegarde la mise à jour
+        } else {
+            // Si le code est déjà activé
+            throw new RuntimeException("Code de validation déjà activé");
+        }
+    }
+
+    @Scheduled(cron = "@daily")
+    public void nettoyerTable() {
+        final Instant now = Instant.now();
+        log.info("Suppression des codes d'activation à {}", now);
+        this.validationRepository.deleteAllByExpirationBefore(now);
+    }
+
 }

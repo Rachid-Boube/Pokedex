@@ -11,10 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
-@Document(collection = "Users")
 @Data
+@Document(collection = "users")
 public class User implements UserDetails {
 
     @Id
@@ -22,9 +21,10 @@ public class User implements UserDetails {
 
     private String username;
 
+    private String email;
+
     private String password;
 
-    private String email;
 
     private boolean actif = false; // Indique si l'utilisateur est actif ou non
 

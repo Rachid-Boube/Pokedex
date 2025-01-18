@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/pokemons")
+@RequestMapping("/pokemons")
 public class PokemonController {
 
     private final PokemonService pokemonService;
