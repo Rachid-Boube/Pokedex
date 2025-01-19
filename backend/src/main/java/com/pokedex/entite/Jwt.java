@@ -31,4 +31,5 @@ public class Jwt {
 
     @DBRef // Référence à un autre document
     private User user;
+
 }

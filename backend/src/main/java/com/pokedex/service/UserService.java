@@ -57,6 +57,12 @@ public class UserService implements UserDetailsService {
         user.setRole(roleUtilisateur);
 
 
+        // Vérifiez que le rôle a un identifiant non nul
+        if (roleUtilisateur.getId() == null) {
+            throw new RuntimeException("Le rôle utilisateur n'a pas d'identifiant.");
+        }
+
+
         // Enregistrer l'utilisateur dans le dépôt
         this.userRepository.save(user);
 
@@ -66,20 +72,27 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void activation(Map<String, String> activation) { // Méthode pour activer un utilisateur avec un code d'activation.
-
-        Validation validation = this.validationService.lireEnFonctionDuCode(activation.get("code")); // Récupère la validation en fonction du code d'activation.
-        if(Instant.now().isAfter(validation.getExpiration())){ // Vérifie si la validation a expiré.
-            throw new RuntimeException("Votre code  d'activation a expiré."); // Lance une exception si la validation a expiré.
-        }
-        // Active la validation
-        this.validationService.activerValidation(activation.get("code"));
-        // Récupère l'utilisateur associé à la validation.'
-        User user = this.userRepository.findById(validation.getUser().getId()).orElseThrow(()->new RuntimeException("L'utilisateur d'activation"));
-        user.setActif(true); // Définit l'utilisateur comme actif.
-        this.userRepository.save(user); // Sauvegarde l'utilisateur mis à jour dans le dépôt.
-
+  public void activation(Map<String, String> activation) {
+    Validation validation = this.validationService.lireEnFonctionDuCode(activation.get("code"));
+    if (Instant.now().isAfter(validation.getExpiration())) {
+        throw new RuntimeException("Votre code d'activation a expiré.");
     }
+
+    // Active la validation
+    this.validationService.activerValidation(activation.get("code"));
+
+    // Récupère l'utilisateur associé à la validation
+    User user = this.userRepository.findById(validation.getUser().getId())
+            .orElseThrow(() -> new RuntimeException("L'utilisateur d'activation"));
+
+    // Vérifiez que l'utilisateur a un identifiant non nul
+    if (user.getId() == null) {
+        throw new RuntimeException("L'utilisateur n'a pas d'identifiant.");
+    }
+
+    user.setActif(true);
+    this.userRepository.save(user);
+}
 
     public User findByUsername(String username) {
         return this.userRepository

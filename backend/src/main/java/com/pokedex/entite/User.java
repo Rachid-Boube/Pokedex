@@ -25,7 +25,6 @@ public class User implements UserDetails {
 
     private String password;
 
-
     private boolean actif = false; // Indique si l'utilisateur est actif ou non
 
 

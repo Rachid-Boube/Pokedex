@@ -75,11 +75,4 @@ public class ValidationService {
         }
     }
 
-    @Scheduled(cron = "@daily")
-    public void nettoyerTable() {
-        final Instant now = Instant.now();
-        log.info("Suppression des codes d'activation à {}", now);
-        this.validationRepository.deleteAllByExpirationBefore(now);
-    }
-
 }
